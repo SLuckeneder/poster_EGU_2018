@@ -89,8 +89,10 @@ snl_tidy <- function(input, type="production", meas.unit = "none", freq="annual"
     mm <- match(colnames(input), concordance_variables$in_variable)
     colnames(input)[!is.na(mm)] <- as.character(concordance_variables$out_variable[na.omit(mm)])
     
-    input$lat <- as.numeric(input$lat)
-    input$long <- as.numeric(input$long)
+    if ("lat" %in% colnames(input)){
+      input$lat <- as.numeric(input$lat)
+      input$long <- as.numeric(input$long)
+    }
     
     
     return(input)
